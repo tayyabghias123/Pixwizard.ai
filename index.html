@@ -2,65 +2,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PixWizard - AI Generator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #0f2027;
+      background: #101820;
       color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
     }
     h1 {
-      margin-top: 40px;
+      margin-top: 2rem;
       color: #00f2fe;
     }
     .container {
-      margin-top: 20px;
+      margin-top: 1rem;
       background: rgba(255,255,255,0.05);
-      padding: 20px;
+      padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
       width: 90%;
       max-width: 500px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
     input {
       width: 100%;
-      padding: 12px;
-      font-size: 1rem;
-      border: none;
+      padding: 10px;
       border-radius: 8px;
-      margin-bottom: 10px;
+      border: none;
+      margin-bottom: 1rem;
+      font-size: 1rem;
     }
     button {
       background: #00f2fe;
-      color: #000;
-      padding: 10px 20px;
-      font-size: 1rem;
-      font-weight: bold;
       border: none;
+      padding: 10px 20px;
       border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
     }
     .result {
       margin-top: 20px;
-      text-align: center;
     }
     .result img, .result video {
       max-width: 100%;
       border-radius: 10px;
       margin-top: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
     }
     footer {
-      margin-top: 40px;
+      margin: 40px 0 10px;
       font-size: 0.8rem;
       color: #aaa;
     }
@@ -69,39 +65,40 @@
 <body>
   <h1>PixWizard</h1>
   <div class="container">
-    <input type="text" id="prompt" placeholder="Enter your prompt here (e.g. cat flying in space)" />
+    <input id="prompt" type="text" placeholder="e.g. cat flying in space or girl dancing video"/>
     <button id="generateBtn">Generate</button>
     <div class="result" id="output"></div>
   </div>
-  <footer>© 2025 PixWizard</footer>
+  <footer>© 2025 PixWizard | Monetag Enabled</footer>
 
-  <!-- Monetag Ad Fire -->
+  <!-- Monetag hidden ad pixel -->
   <img src="https://otieu.com/4/9528259" width="1" height="1" style="display:none;" />
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const button = document.getElementById("generateBtn");
-      const input = document.getElementById("prompt");
+    document.addEventListener("DOMContentLoaded", function() {
+      const generateBtn = document.getElementById("generateBtn");
+      const promptInput = document.getElementById("prompt");
       const output = document.getElementById("output");
 
-      button.addEventListener("click", function () {
-        const prompt = input.value.trim().toLowerCase();
-        output.innerHTML = '<p>Generating...</p>';
+      generateBtn.addEventListener("click", function () {
+        const prompt = promptInput.value.trim().toLowerCase();
+        output.innerHTML = "<p>Generating...</p>";
 
         setTimeout(() => {
           if (!prompt) {
-            output.innerHTML = '<p>Please enter a prompt!</p>';
+            output.innerHTML = "<p>Please enter a prompt.</p>";
             return;
           }
-          if (prompt.includes('video')) {
+
+          if (prompt.includes("video")) {
             output.innerHTML = \`
               <video autoplay muted loop playsinline controls>
                 <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>\`;
           } else {
-            const url = 'https://source.unsplash.com/800x600/?' + encodeURIComponent(prompt);
-            output.innerHTML = \`<img src="\${url}" alt="Generated AI Image">\`;
+            const imgUrl = "https://source.unsplash.com/800x600/?" + encodeURIComponent(prompt);
+            output.innerHTML = \`<img src="\${imgUrl}" alt="Generated image"/>\`;
           }
         }, 1200);
       });
